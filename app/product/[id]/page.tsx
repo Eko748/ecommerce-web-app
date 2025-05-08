@@ -1,7 +1,14 @@
-import { fetchProductById } from "@/lib/api";
+// app/product/[id]/page.tsx
+import { fetchProductById } from "@/lib/api"
 
-export default async function ProductDetail({ params }: { params: { id: string } }) {
-    const product = await fetchProductById(params.id);
+type ProductDetailProps = {
+    params: {
+        id: string
+    }
+}
+
+export default async function ProductDetail({ params }: ProductDetailProps) {
+    const product = await fetchProductById(params.id)
 
     return (
         <div className="p-6">
@@ -9,5 +16,5 @@ export default async function ProductDetail({ params }: { params: { id: string }
             <p className="text-gray-700 mt-2">{product.description}</p>
             <p className="text-lg mt-4 font-semibold">Rp {product.price}</p>
         </div>
-    );
+    )
 }
