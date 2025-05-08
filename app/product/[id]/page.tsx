@@ -1,13 +1,11 @@
 // app/product/[id]/page.tsx
 import { fetchProductById } from "@/lib/api"
 
-type ProductDetailProps = {
-    params: {
-        id: string
-    }
-}
-
-export default async function ProductDetail({ params }: ProductDetailProps) {
+export default async function ProductDetail({
+    params,
+}: {
+    params: { id: string }
+}) {
     const product = await fetchProductById(params.id)
 
     return (
