@@ -1,0 +1,35 @@
+// Define the structure of the API response, including optional pagination
+export interface Pagination {
+  total: number;
+  per_page: number;
+  current_page: number;
+  total_pages: number;
+}
+
+export interface ApiResponse<T> {
+  status: boolean;
+  message: string;
+  code: number;
+  data: T; // This represents the actual data array (products, etc.)
+  pagination?: Pagination; // Make pagination optional
+}
+
+export interface CustomFilter {
+  [key: string]: string | number | boolean | undefined | null;
+}
+
+export interface FetchPaginateParams {
+  limit?: number;
+  page?: number;
+  ascending?: number;
+  search?: string;
+  customFilter?: CustomFilter;
+}
+
+const paginateParams = {
+  limit: 10,
+  page: 1,
+  ascending: 0,
+  search: "",
+  customFilter: {},
+};
