@@ -20,7 +20,7 @@ export default function ProductList({ initial, keyword }: ListProps) {
     // Update data whenever keyword or page changes
     useEffect(() => {
         setData(initial)
-        setPage(1)
+        setPage(2)
         setIsEnd(false)
     }, [initial, keyword])
 
