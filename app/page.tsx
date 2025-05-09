@@ -1,4 +1,3 @@
-// app/page.tsx
 import ClientRenderer from '@/components/Home/ClientRenderer'
 import { Metadata } from 'next'
 
@@ -9,6 +8,7 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
+// Ensure Props type includes searchParams and possibly extend from PageProps if necessary
 type Props = {
   searchParams?: {
     keyword?: string
