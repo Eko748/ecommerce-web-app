@@ -1,6 +1,6 @@
-// app/page.tsx
-import ClientRenderer from '@/components/Home/ClientRenderer'
 import { Metadata } from 'next'
+import ClientRenderer from '@/components/Home/ClientRenderer'
+
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: 'Beranda | Shopee Clone',
@@ -8,13 +8,11 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-type HomeProps = {
-  searchParams?: {
-    keyword?: string
-  }
-}
-
-export default function HomePageWrapper({ searchParams }: HomeProps) {
+export default function HomePageWrapper({
+  searchParams,
+}: {
+  searchParams?: { keyword?: string }
+}) {
   const keyword = searchParams?.keyword || ''
   return <ClientRenderer keyword={keyword} />
 }
