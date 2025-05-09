@@ -8,15 +8,13 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-type PageProps = {
-  params: Record<string, never>
-  searchParams?: {
-    keyword?: string
-  }
-}
-
-
-export default function HomePageWrapper({ searchParams }: PageProps) {
+export default function HomePage({
+  searchParams,
+}: {
+  searchParams?: { keyword?: string }
+}) {
   const keyword = searchParams?.keyword || ''
   return <ClientRenderer keyword={keyword} />
 }
+
+
