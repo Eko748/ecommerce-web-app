@@ -1,3 +1,4 @@
+// components/Home/SearchBar.tsx
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
@@ -16,9 +17,12 @@ export default function SearchBar() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
+
+        if (!params) return
+
         const search = new URLSearchParams(params.toString())
         if (keyword) {
-            search.set('keyword', keyword)  
+            search.set('keyword', keyword)
         } else {
             search.delete('keyword')
         }
@@ -29,33 +33,34 @@ export default function SearchBar() {
     const handleSuggestionClick = (text: string) => {
         setKeyword(text)
         setShowSuggestions(false)
+
+        if (!params) return
+
         const search = new URLSearchParams(params.toString())
         search.set('keyword', text)
         router.push(`/?${search.toString()}`)
     }
 
-useEffect(() => {
-    if (!keyword.trim()) {
-        setSuggestions([]);
-        return;
-    }
-
-    const timeout = setTimeout(async () => {
-        try {
-            const results = await fetchWikipediaSuggestions(keyword);
-            setSuggestions(results);
-            setShowSuggestions(true);
-        } catch (error) {
-            console.error("Error fetching suggestions:", error);
-            setSuggestions([]);
+    useEffect(() => {
+        if (!keyword.trim()) {
+            setSuggestions([])
+            return
         }
-    }, 300);
 
-    return () => clearTimeout(timeout);
-}, [keyword]);
+        const timeout = setTimeout(async () => {
+            try {
+                const results = await fetchWikipediaSuggestions(keyword)
+                setSuggestions(results)
+                setShowSuggestions(true)
+            } catch (error) {
+                console.error("Error fetching suggestions:", error)
+                setSuggestions([])
+            }
+        }, 300)
 
+        return () => clearTimeout(timeout)
+    }, [keyword])
 
-    // Close dropdown when clicking outside
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {

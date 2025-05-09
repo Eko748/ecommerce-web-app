@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+// app/page.tsx (server-side component)
 import { Metadata } from 'next'
 import ClientRenderer from '@/components/Home/ClientRenderer'
 
@@ -9,10 +9,7 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-const HomePage: NextPage<{ searchParams?: { keyword?: string } }> = ({ searchParams }) => {
-  const keyword = searchParams?.keyword || ''
-  return <ClientRenderer keyword={keyword} />
+export default function HomePage() {
+  // Simply render the ClientRenderer component without using useSearchParams
+  return <ClientRenderer />
 }
-
-export default HomePage
-
