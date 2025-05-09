@@ -1,6 +1,6 @@
 import { fetchProducts } from '@/lib/api'
 import type { Metadata } from 'next'
-import ClientRenderer from '@/components/Home/ClientRenderer' // Import ClientRenderer
+import ClientRenderer from '@/components/Home/ClientRenderer'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -9,13 +9,7 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-type Props = {
-  searchParams?: {
-    keyword?: string
-  }
-}
-
-export default async function HomePage({ searchParams }: Props) {
+export default async function HomePage({ searchParams }: { searchParams?: { keyword?: string } }) {
   const keyword = searchParams?.keyword || ''
   const response = await fetchProducts({ page: 1, limit: 10, keyword })
   const initial = response?.data || []
