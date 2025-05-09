@@ -1,4 +1,5 @@
 // app/page.tsx (server-side component)
+
 import { Metadata } from 'next'
 import ClientRenderer from '@/components/Home/ClientRenderer'
 
@@ -10,6 +11,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function HomePage() {
-  // Simply render the ClientRenderer component without using useSearchParams
-  return <ClientRenderer />
+  return (
+    <ClientRenderer /> // Now directly rendering ClientRenderer (client-side component)
+  )
 }

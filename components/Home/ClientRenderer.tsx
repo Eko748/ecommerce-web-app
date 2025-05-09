@@ -8,7 +8,7 @@ import { fetchProducts } from '@/lib/api'
 import ProductList from '@/components/Product/ProductList'
 import DesktopLayout from '@/components/Layout/DesktopLayout'
 import MobileLayout from '@/components/Layout/MobileLayout'
-import { useSearchParams } from 'next/navigation'  // use this in the client component
+import { useSearchParams } from 'next/navigation'
 
 type Props = {
   keyword?: string
@@ -19,7 +19,7 @@ export default function ClientRenderer({ keyword = '' }: Props) {
   const [data, setData] = useState<Product[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
-  
+
   const params = useSearchParams() // Use it in client-side component
   const queryKeyword = params?.get('keyword') || keyword
 
