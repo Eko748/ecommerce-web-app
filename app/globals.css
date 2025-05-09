@@ -3,7 +3,94 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --background-light: #ffffff;
+  --foreground-light: #171717;
+  --background-dark: #1e1e1e; /* Dark background */
+  --foreground-dark: #ededed;  /* Light text for dark mode */
+  
+  /* Color palette */
+  --theme-100: #f3f4f6; /* Lighter shades for background */
+  --theme-200: #e5e7eb; /* Slightly darker */
+  --theme-300: #d1d5db;
+  --theme-400: #9ca3af;
+  --theme-500: #6b7280; /* Mid-tone gray */
+  --theme-600: #4b5563; /* Darker shades for text */
+  
+  /* Card color shades */
+  --card-900: #1f2937; /* Darker shade for cards */
+  --card-800: #374151; /* Card background */
+  --card-700: #4b5563;
+  --card-600: #6b7280;
+
+  /* Text color shades */
+  --text-theme-100: #f3f4f6; /* Light text */
+  --text-theme-200: #e5e7eb; /* Slightly darker */
+  --text-theme-300: #d1d5db; /* Medium text */
+  --text-theme-400: #9ca3af; /* Darker text */
+  --text-theme-500: #6b7280;
+  --text-theme-600: #4b5563; /* Dark text */
+
+  /* Reverse Text Color Shades (inverted) */
+  --reverse-text-theme-100: #171717; /* Dark text */
+  --reverse-text-theme-200: #171717;
+  --reverse-text-theme-300: #171717;
+  --reverse-text-theme-400: #171717;
+  --reverse-text-theme-500: #171717;
+  --reverse-text-theme-600: #171717; /* Dark text (for reverse) */
+  
+  /* Reverse Background Color Shades (inverted) */
+  --reverse-bg-theme-100: #1f2937; /* Dark background */
+  --reverse-bg-theme-200: #374151;
+  --reverse-bg-theme-300: #4b5563;
+  --reverse-bg-theme-400: #6b7280;
+  --reverse-bg-theme-500: #9ca3af; /* Mid-tone background */
+  --reverse-bg-theme-600: #d1d5db; /* Light background */
 }
+
+/* Dark mode overrides */
+.dark {
+  --background: var(--background-dark);  /* Dark background */
+  --foreground: var(--foreground-dark);  /* Light text for dark mode */
+  
+  /* Additional color changes for dark mode */
+  --theme-100: #2d2d2d;  /* Darker version of the theme */
+  --theme-200: #4a4a4a;
+  --theme-300: #676767;
+  --theme-400: #838383;
+  --theme-500: #9f9f9f;  /* Darker shades */
+  --theme-600: #c2c2c2;
+
+  --text-theme-100: #e5e7eb; /* Light text for dark mode */
+  --text-theme-200: #b1b3b8;
+  --text-theme-300: #a3a5a8;
+  --text-theme-400: #8c8e91;
+  --text-theme-500: #7c7e81; /* Darker text */
+  --text-theme-600: #6a6c6f;
+  
+  /* Darker card background */
+  --card-900: #2c3e50; 
+  --card-800: #34495e;
+  --card-700: #5d6d7e;
+  --card-600: #85929e;
+  
+  /* Reverse Text Color Shades (inverted) */
+  --reverse-text-theme-100: #ededed; /* Light text */
+  --reverse-text-theme-200: #ededed;
+  --reverse-text-theme-300: #ededed;
+  --reverse-text-theme-400: #ededed;
+  --reverse-text-theme-500: #ededed;
+  --reverse-text-theme-600: #ededed; /* Light text (for reverse) */
+  
+  /* Reverse Background Color Shades (inverted) */
+  --reverse-bg-theme-100: #9ca3af; /* Light background */
+  --reverse-bg-theme-200: #6b7280;
+  --reverse-bg-theme-300: #4b5563;
+  --reverse-bg-theme-400: #374151;
+  --reverse-bg-theme-500: #1f2937; /* Darker background */
+  --reverse-bg-theme-600: #1e1e1e; /* Dark background */
+}
+
+
 
 @theme inline {
   --color-background: var(--background);
@@ -12,10 +99,196 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* Background color classes */
+.bg-theme-100 {
+  background-color: var(--theme-100);
+}
+
+.bg-theme-200 {
+  background-color: var(--theme-200);
+}
+
+.bg-theme-300 {
+  background-color: var(--theme-300);
+}
+
+.bg-theme-400 {
+  background-color: var(--theme-400);
+}
+
+.bg-theme-500 {
+  background-color: var(--theme-500);
+}
+
+.bg-theme-600 {
+  background-color: var(--theme-600);
+}
+
+.bg-card-900 {
+  background-color: var(--card-900);
+}
+
+.bg-card-800 {
+  background-color: var(--card-800);
+}
+
+.bg-card-700 {
+  background-color: var(--card-700);
+}
+
+.bg-card-600 {
+  background-color: var(--card-600);
+}
+
+/* Text color classes */
+.text-theme-100 {
+  color: var(--text-theme-100);
+}
+
+.text-theme-200 {
+  color: var(--text-theme-200);
+}
+
+.text-theme-300 {
+  color: var(--text-theme-300);
+}
+
+.text-theme-400 {
+  color: var(--text-theme-400);
+}
+
+.text-theme-500 {
+  color: var(--text-theme-500);
+}
+
+.text-theme-600 {
+  color: var(--text-theme-600);
+}
+
+/* Reverse Background color classes */
+.rev-bg-theme-100 {
+  background-color: var(--reverse-bg-theme-100);
+}
+
+.rev-bg-theme-200 {
+  background-color: var(--reverse-bg-theme-200);
+}
+
+.rev-bg-theme-300 {
+  background-color: var(--reverse-bg-theme-300);
+}
+
+.rev-bg-theme-400 {
+  background-color: var(--reverse-bg-theme-400);
+}
+
+.rev-bg-theme-500 {
+  background-color: var(--reverse-bg-theme-500);
+}
+
+.rev-bg-theme-600 {
+  background-color: var(--reverse-bg-theme-600);
+}
+
+/* Reverse Text color classes */
+.rev-text-theme-100 {
+  color: var(--reverse-text-theme-100);
+}
+
+.rev-text-theme-200 {
+  color: var(--reverse-text-theme-200);
+}
+
+.rev-text-theme-300 {
+  color: var(--reverse-text-theme-300);
+}
+
+.rev-text-theme-400 {
+  color: var(--reverse-text-theme-400);
+}
+
+.rev-text-theme-500 {
+  color: var(--reverse-text-theme-500);
+}
+
+.rev-text-theme-600 {
+  color: var(--reverse-text-theme-600);
+}
+
+/* Reverse Card Background color classes */
+.bg-reverse-card-900 {
+  background-color: var(--reverse-bg-theme-100);
+}
+
+.bg-reverse-card-800 {
+  background-color: var(--reverse-bg-theme-200);
+}
+
+.bg-reverse-card-700 {
+  background-color: var(--reverse-bg-theme-300);
+}
+
+.bg-reverse-card-600 {
+  background-color: var(--reverse-bg-theme-400);
+}
+
+/* Reverse Text for Dark Mode (Inverted Colors) */
+@media (prefers-color-scheme: dark) {
+  .rev-bg-theme-100 {
+    background-color: var(--reverse-bg-theme-100);
+  }
+
+  .rev-bg-theme-200 {
+    background-color: var(--reverse-bg-theme-200);
+  }
+
+  .rev-bg-theme-300 {
+    background-color: var(--reverse-bg-theme-300);
+  }
+
+  .rev-bg-theme-400 {
+    background-color: var(--reverse-bg-theme-400);
+  }
+
+  .rev-bg-theme-500 {
+    background-color: var(--reverse-bg-theme-500);
+  }
+
+  .rev-bg-theme-600 {
+    background-color: var(--reverse-bg-theme-600);
+  }
+
+  .rev-text-theme-100 {
+    color: var(--reverse-text-theme-100);
+  }
+
+  .rev-text-theme-200 {
+    color: var(--reverse-text-theme-200);
+  }
+
+  .rev-text-theme-300 {
+    color: var(--reverse-text-theme-300);
+  }
+
+  .rev-text-theme-400 {
+    color: var(--reverse-text-theme-400);
+  }
+
+  .rev-text-theme-500 {
+    color: var(--reverse-text-theme-500);
+  }
+
+  .rev-text-theme-600 {
+    color: var(--reverse-text-theme-600);
+  }
+}
+
+
+/* Fallback for prefers-color-scheme: dark */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--background-dark);
+    --foreground: var(--foreground-dark);
   }
 }
 

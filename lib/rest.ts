@@ -9,10 +9,15 @@ type HTTPMethod = "GET" | "POST" | "PUT" | "DELETE";
 // Tipe opsional untuk body (bisa berupa objek JSON atau FormData)
 type RequestBody = Record<string, unknown> | FormData | undefined;
 
+interface RestAPIOptions {
+  baseURLPassthrough?: boolean;
+}
+
 export async function restAPI<TResponse>(
   method: HTTPMethod,
   url: string,
-  body?: RequestBody
+  body?: RequestBody,
+  options?: RestAPIOptions
 ): Promise<TResponse> {
   let token = "";
 
@@ -25,7 +30,7 @@ export async function restAPI<TResponse>(
     ? { Authorization: `Bearer ${token}` }
     : {};
 
-  const fullUrl = `${API_BASE_URL}${url}`;
+  const fullUrl = options?.baseURLPassthrough ? url : `${API_BASE_URL}${url}`;
 
   try {
     switch (method) {
@@ -56,7 +61,7 @@ export async function restAPI<TResponse>(
     }
   } catch (err) {
     const error = err as AxiosError;
-    console.error("API Error:", error.message);
     throw error;
   }
 }
+

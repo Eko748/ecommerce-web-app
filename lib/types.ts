@@ -22,6 +22,11 @@ export interface FetchPaginateParams {
   limit?: number;
   page?: number;
   ascending?: number;
-  search?: string;
+  keyword?: string;
   customFilter?: CustomFilter;
+}
+
+export interface SuggestionsResponse {
+  status: string;
+  results: string[];
 }

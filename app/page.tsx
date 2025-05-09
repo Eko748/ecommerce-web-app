@@ -1,10 +1,21 @@
 // app/page.tsx
-import { fetchProducts } from '@/lib/api'
-import ClientProductList from '@/components/ClientProductList'
+import ClientRenderer from '@/components/Home/ClientRenderer'
+import { Metadata } from 'next'
 
-export default async function HomePage() {
-  const response = await fetchProducts({ page: 1, limit: 10 })
-  const initial = response?.data || []
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Beranda | Shopee Clone',
+    description: 'Temukan produk menarik dengan diskon hingga 80%',
+  }
+}
 
-  return <ClientProductList initial={initial} />
+type Props = {
+  searchParams?: {
+    keyword?: string
+  }
+}
+
+export default function HomePageWrapper({ searchParams }: Props) {
+  const keyword = searchParams?.keyword || ''
+  return <ClientRenderer keyword={keyword} />
 }

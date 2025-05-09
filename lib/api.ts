@@ -1,15 +1,21 @@
 import { Product } from "@/types/product";
-import { fetchData } from "./client";
+import { fetchData, fetchOpenSourceAPI } from "./client";
 import { paginateParams } from "./const";
-import { FetchPaginateParams, Pagination } from "./types";
+import {
+  FetchPaginateParams,
+  Pagination,
+  SuggestionsResponse,
+} from "./types";
 
 // Fetch products with pagination parameters
-export async function fetchProducts(params: FetchPaginateParams = paginateParams): Promise<{ data: Product[]; pagination?: Pagination }> {
+export async function fetchProducts(
+  params: FetchPaginateParams = paginateParams
+): Promise<{ data: Product[]; pagination?: Pagination }> {
   const mergedParams = {
     page: params.page ?? paginateParams.page,
     per_page: params.limit ?? paginateParams.limit,
     ascending: params.ascending ?? paginateParams.ascending,
-    search: params.search ?? paginateParams.search,
+    keyword: params.keyword ?? paginateParams.keyword,
     ...(params.customFilter || {}),
   };
 
@@ -27,3 +33,34 @@ export async function fetchProductById(id: string): Promise<Product> {
   return response.data;
 }
 
+export async function fetchWikipediaSuggestions(
+  query: string
+): Promise<string[]> {
+  // Define the parameters to be passed to the API
+  const params = { keyword: query };
+
+  // Call the generic fetch function with the appropriate URL and parameters
+  const response = await fetchOpenSourceAPI<{
+    suggestions: never[];
+    data: SuggestionsResponse;
+  }>(`/wikipedia/suggestions`, params);
+
+  // Access the 'suggestions' field from the 'data' property
+  return response.data.suggestions || []; // This ensures we return the correct type (string[])
+}
+
+export async function fetchFakeStoreSuggestions(
+  query: string
+): Promise<string[]> {
+  // Define the parameters to be passed to the API
+  const params = { keyword: query };
+
+  // Call the generic fetch function with the appropriate URL and parameters
+  const response = await fetchOpenSourceAPI<{
+    suggestions: never[];
+    data: SuggestionsResponse;
+  }>(`/fakestore/suggestions`, params);
+
+  // Access the 'suggestions' field from the 'data' property
+  return response.data.suggestions || []; // This ensures we return the correct type (string[])
+}

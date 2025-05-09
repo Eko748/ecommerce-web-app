@@ -3,12 +3,11 @@
 import { Pagination, ApiResponse, FetchPaginateParams } from "./types"; // Import the interfaces
 import { restAPI } from "./rest";
 
-
 export const paginateParams: FetchPaginateParams = {
   limit: 10,
   page: 1,
   ascending: 0,
-  search: "",
+  keyword: "",
   customFilter: {},
 };
 
@@ -36,7 +35,18 @@ export async function fetchData<T>(
 
   // Return both the data and pagination metadata (if present)
   return {
-    data: response.data,        // The actual data array
-    pagination: pagination,      // The pagination metadata (if any)
+    data: response.data,
+    pagination: pagination,
+  };
+}
+
+export async function fetchOpenSourceAPI<T>(
+  url: string,
+  params: Record<string, string | number | boolean | undefined | null> = {}
+): Promise<{ data: T }> {
+  const response = await restAPI<ApiResponse<T>>("GET", url, params);
+
+  return {
+    data: response.data,
   };
 }
