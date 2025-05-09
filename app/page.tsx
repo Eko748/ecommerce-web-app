@@ -1,6 +1,5 @@
-// app/page.tsx
-import ClientRenderer from '@/components/Home/ClientRenderer'
 import { Metadata } from 'next'
+import ClientRenderer from '@/components/Home/ClientRenderer'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -9,11 +8,7 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-type PageProps = {
-  searchParams: { [key: string]: string | string[] | undefined }
-}
-
-export default function HomePageWrapper({ searchParams }: PageProps) {
-  const keyword = typeof searchParams.keyword === 'string' ? searchParams.keyword : ''
+export default function HomePage({ searchParams }: { searchParams?: { keyword?: string } }) {
+  const keyword = searchParams?.keyword || ''
   return <ClientRenderer keyword={keyword} />
 }
