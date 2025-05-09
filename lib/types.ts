@@ -1,3 +1,5 @@
+import { Product } from "@/types/product";
+
 // Define the structure of the API response, including optional pagination
 export interface Pagination {
   total: number;
@@ -29,4 +31,9 @@ export interface FetchPaginateParams {
 export interface SuggestionsResponse {
   status: string;
   results: string[];
+}
+
+export type ListProps = {
+    initial: Product[]
+    keyword: string
 }

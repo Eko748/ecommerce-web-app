@@ -1,8 +1,7 @@
 import { fetchProducts } from '@/lib/api'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import ClientRenderer from '@/components/Home/ClientRenderer'
 
-// Generate metadata for SEO
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: 'Beranda | Shopee Clone',
@@ -10,17 +9,22 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-// Server Component (data fetching happens here)
-export default async function HomePage({ searchParams }: { searchParams?: { keyword?: string } }) {
-  // Get keyword from searchParams
-  const keyword = searchParams?.keyword || ''
+// Define the Props type properly
+type Props = {
+  searchParams?: {
+    keyword?: string
+  }
+}
 
-  // Fetch data from the API
+// Handle page with the correct type
+export default async function HomePage({ searchParams }: Props) {
+  const keyword = searchParams?.keyword || ''
   const response = await fetchProducts({ page: 1, limit: 10, keyword })
   const initial = response?.data || []
 
-  // Pass data to ClientRenderer (Client Component)
   return (
-    <ClientRenderer initialData={initial} keyword={keyword} />
+    <>
+      <ClientRenderer initial={initial} keyword={keyword} />
+    </>
   )
 }

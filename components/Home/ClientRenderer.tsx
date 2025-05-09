@@ -2,17 +2,12 @@
 
 import { useState } from 'react'
 import useIsMobile from '@/hooks/useIsMobile'
-import { Product } from '@/types/product'
 import ProductList from '@/components/Product/ProductList'
 import DesktopLayout from '@/components/Layout/DesktopLayout'
 import MobileLayout from '@/components/Layout/MobileLayout'
+import { ListProps } from '@/lib/types'
 
-type Props = {
-  keyword?: string
-  initialData: Product[]
-}
-
-export default function ClientRenderer({ initialData, keyword = '' }: Props) {
+export default function ClientRenderer({ initial, keyword }: ListProps) {
   const isMobile = useIsMobile()
   const [error] = useState<string | null>(null)
 
@@ -21,7 +16,7 @@ export default function ClientRenderer({ initialData, keyword = '' }: Props) {
       {error ? (
         <div className="col-span-full text-center text-red-500">{error}</div>
       ) : (
-        <ProductList initial={initialData} keyword={keyword} />
+        <ProductList initial={initial} keyword={keyword} />
       )}
     </div>
   )

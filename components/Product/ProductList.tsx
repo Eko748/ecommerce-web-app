@@ -4,14 +4,9 @@ import { useState, useEffect } from 'react'
 import { Product } from '@/types/product'
 import { fetchProducts } from '@/lib/api'
 import { useInView } from 'react-intersection-observer'
-import { useRouter, useSearchParams } from 'next/navigation'
 import ProductCard from './ProductCard'
 import ProductCardSkeleton from './ProductCardSkeleton'
-
-type ListProps = {
-    initial: Product[]
-    keyword: string
-}
+import { ListProps } from '@/lib/types'
 
 const OFFSET = 10
 
@@ -21,13 +16,11 @@ export default function ProductList({ initial, keyword }: ListProps) {
     const [isEnd, setIsEnd] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const { ref, inView } = useInView()
-    const router = useRouter()
-    const params = useSearchParams()
 
-    // Mengatur data baru berdasarkan keyword
+    // Update data whenever keyword or page changes
     useEffect(() => {
         setData(initial)
-        setPage(2)
+        setPage(1)
         setIsEnd(false)
     }, [initial, keyword])
 
@@ -63,16 +56,6 @@ export default function ProductList({ initial, keyword }: ListProps) {
             loadMore()
         }
     }, [inView, page, keyword, isLoading, isEnd])
-
-    useEffect(() => {
-        if (params) {
-            const keywordFromParams = params.get('keyword') || ''
-            if (keywordFromParams !== keyword) {
-                // Mengupdate keyword jika berbeda dari yang ada di URL
-                router.push(`/?keyword=${keywordFromParams}`)
-            }
-        }
-    }, [params, router, keyword])
 
     return (
         <>
