@@ -1,6 +1,6 @@
+// app/page.tsx
 import ClientRenderer from '@/components/Home/ClientRenderer'
 import { Metadata } from 'next'
-
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: 'Beranda | Shopee Clone',
@@ -8,14 +8,13 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-// Ensure Props type includes searchParams and possibly extend from PageProps if necessary
-type Props = {
+type HomeProps = {
   searchParams?: {
     keyword?: string
   }
 }
 
-export default function HomePageWrapper({ searchParams }: Props) {
+export default function HomePageWrapper({ searchParams }: HomeProps) {
   const keyword = searchParams?.keyword || ''
   return <ClientRenderer keyword={keyword} />
 }
