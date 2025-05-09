@@ -9,11 +9,11 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-type Props = {
+type PageProps = {
   searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export default function HomePageWrapper({ searchParams }: Props) {
+export default function HomePageWrapper({ searchParams }: PageProps) {
   const keyword = typeof searchParams.keyword === 'string' ? searchParams.keyword : ''
   return <ClientRenderer keyword={keyword} />
 }
