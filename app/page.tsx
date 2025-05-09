@@ -1,7 +1,6 @@
-// app/page.tsx (server-side component)
-
-import { Metadata } from 'next'
-import ClientRenderer from '@/components/Home/ClientRenderer'
+import { fetchProducts } from '@/lib/api'
+import type { Metadata } from 'next'
+import ClientRenderer from '@/components/Home/ClientRenderer' // Import ClientRenderer
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -10,8 +9,20 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default function HomePage() {
+type Props = {
+  searchParams?: {
+    keyword?: string
+  }
+}
+
+export default async function HomePage({ searchParams }: Props) {
+  const keyword = searchParams?.keyword || ''
+  const response = await fetchProducts({ page: 1, limit: 10, keyword })
+  const initial = response?.data || []
+
   return (
-    <ClientRenderer /> // Now directly rendering ClientRenderer (client-side component)
+    <>
+        <ClientRenderer initialData={initial} keyword={keyword} />
+    </>
   )
 }
