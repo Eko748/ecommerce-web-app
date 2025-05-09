@@ -1,3 +1,4 @@
+import type { NextPage } from 'next'
 import { Metadata } from 'next'
 import ClientRenderer from '@/components/Home/ClientRenderer'
 
@@ -8,7 +9,10 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default function HomePage({ searchParams }: { searchParams?: { keyword?: string } }) {
+const HomePage: NextPage<{ searchParams?: { keyword?: string } }> = ({ searchParams }) => {
   const keyword = searchParams?.keyword || ''
   return <ClientRenderer keyword={keyword} />
 }
+
+export default HomePage
+
